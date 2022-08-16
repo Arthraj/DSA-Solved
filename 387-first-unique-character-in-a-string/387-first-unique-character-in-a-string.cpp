@@ -3,25 +3,19 @@ public:
     
     int firstUniqChar(string s) {
         int n=s.length();
-        int res=INT_MAX;
-        const int N=26;
         
-        int hash[N]={0};
+        unordered_map<char,pair<int,int>> mp;
+        
         for(int i=0;i<n;i++){
-            hash[s[i]-'a']++;
+            mp[s[i]].first++;
+            mp[s[i]].second=i;
         }
         
-        for(int i=0;i<26;i++){
-            if(hash[i]==1){
-                char ch='a'+i;
-                size_t found=s.find(ch);
-                if(found!=string::npos){
-                    if(res>found)res=found;
-                }
+        for(int i=0;i<n;i++){
+            if(mp[s[i]].first==1){
+                return mp[s[i]].second;
             }
         }
-        if(res==INT_MAX)
-            return -1;
-        return res;
+        return -1;
     }
 };
