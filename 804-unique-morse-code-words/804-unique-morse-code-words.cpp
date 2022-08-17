@@ -5,7 +5,6 @@ public:
         
         vector<string> hash={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
         
-        int cnt=0;
         set<string> st;
         
         for(string s: words){
@@ -13,12 +12,9 @@ public:
             for(int i=0;i<s.length();i++){
                 temp.append(hash[s[i]-'a']);
             }
-            // cout<<temp<<endl;
-            if(st.find(temp)==st.end()){
-                cnt++;st.insert(temp);
-            }
+            st.insert(temp);
         }
         
-        return cnt;
+        return st.size();
     }
 };
