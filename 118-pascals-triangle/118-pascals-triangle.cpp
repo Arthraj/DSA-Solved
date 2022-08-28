@@ -3,27 +3,16 @@
 class Solution {
 public:
     vector<vector<int>> generate(int n) {
-        v<v<int>> res;
-        v<int> temp;
-        temp.pb(1);
-        res.pb(temp);
-        if(n==1)return res;
+        v<v<int>> res(n);
         
-        temp.pb(1);
-        res.pb(temp);
-        if(n==2)return res;
-        
-        for(int i=2;i<n;i++){
-            v<int> prev=res[i-1];
-            int x=prev.size();
-            temp.clear();
-            temp.pb(1);
+        for(int i=0;i<n;i++){
+            v<int> temp(i+1);
+            temp[0]=temp[i]=1;
             
-            for(int i=0;i<x-1;i++){
-                temp.pb(prev[i]+prev[i+1]);
+            for(int j=1;j<i;j++){
+                temp[j]=res[i-1][j-1]+res[i-1][j];
             }
-            temp.pb(1);
-            res.pb(temp);
+            res[i]=temp;
         }
         return res;
     }
