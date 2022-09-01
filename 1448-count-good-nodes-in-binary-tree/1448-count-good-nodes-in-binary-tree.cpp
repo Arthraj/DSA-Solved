@@ -27,29 +27,22 @@ Cases:-
 
 class Solution {
 public:
-    
-    int countGoodNodes(TreeNode* root, priority_queue<int>pq){
+    int cnt=0;
+    void countGoodNodes(TreeNode* root, int maxi){
         if(root==NULL)
-            return 0;
-        
-        pq.push(root->val);
-        int res=0;
-        if(pq.top()==root->val)
-                res+=1;
-        
-        int lc=countGoodNodes(root->left,pq);
-        int rc=countGoodNodes(root->right,pq);
-        
-        res+=lc+rc;
-        
-        pq.pop();
-        return res;
+            return;
+
+        if(root->val>=maxi){
+                cnt++;maxi=root->val;
+        }        
+        countGoodNodes(root->left,maxi);
+        countGoodNodes(root->right,maxi);
+        return;
     }
-    
     
     int goodNodes(TreeNode* root) {
         if(root==NULL)return 0;
-        priority_queue <int> pq;
-        return countGoodNodes(root,pq);;
+        countGoodNodes(root,root->val);
+        return cnt;
     }
 };
